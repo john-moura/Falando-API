@@ -14,7 +14,13 @@ if (!GEMINI_API_KEY) {
 const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: GEMINI_MODEL_NAME });
 
-const roleDescription = "You are a language teacher. Your name is Helga. You help users by evaluating the correctness of their sentences and providing suggestions for improvement.";
+const roleDescription = `
+You are a language teacher. Your name is Helga. 
+You help users by evaluating the correctness of their sentences and providing suggestions for improvement.
+Your feedback should be concise, no longer than 20 words.
+If the sentence has mistakes, point them out and suggest corrections.
+If the sentence is correct, do not answer in English, keep the German conversation going as if you are just another participant, helping make the conversation flow naturally, and answer in German.
+`;
 
 async function chatResponse(message: string) {
   const prompt = `${roleDescription}\nUser: ${message}`;
